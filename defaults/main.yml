@@ -1,0 +1,128 @@
+---
+# Role control variables
+# ~~~~~~~~~~~~~~~~~~~~~~
+# Variables used to control role execution
+prepare_application: True
+deploy_application: True
+update_proxy: True
+use_nginx: False
+
+# Instance variables
+# ~~~~~~~~~~~~~~~~~~
+instance_name: 'ida'
+instance_domain: 'fairdata.fi'
+deployment_fqdn: '{{ instance_name }}.{{ instance_domain }}'
+
+# Directory variables
+# ~~~~~~~~~~~~~~~~~~~
+# Variables determining used directories
+directory_source_root: '/var'
+directory_venv_agents: '{{ repo_ida_path }}/venv'
+directory_log: '/var/log/ida'
+directory_data1_root: '/var/lib/storage_vol01'
+directory_data2_root: '/var/lib/storage_vol02'
+
+# Deployment variables
+# ~~~~~~~~~~~~~~~~~~~~
+deploy_key: '~/.ssh/id_rsa'
+
+# Repo variables
+# ~~~~~~~~~~~~~~
+# Variables related to source repository
+repo_ida_url: 'https://github.com/CSCfi/ida2'
+repo_ida_version: 'master'
+repo_ida_path: '{{ directory_source_root }}/ida'
+
+repo_ida_tools_url: 'https://github.com/CSCfi/ida2-command-line-tools'
+repo_ida_tools_version: 'master'
+repo_ida_tools_path: '{{ directory_source_root }}/ida-tools'
+
+# Python variables
+# ~~~~~~~~~~~~~~~~
+python_executable: '/opt/fairdata/python3/bin/python3.8'
+python_virtualenv_command: 'virtualenv'
+
+# Redis variables
+# ~~~~~~~~~~~~~~~
+redis_host: '127.0.0.1'
+redis_port: 6379
+
+# Httpd variables
+# ~~~~~~~~~~~~~~~
+httpd_http_port: 80
+httpd_https_port: 443
+httpd_https_ida_pas_port: 4443
+
+httpd_ssl_certificate_file: '/etc/pki/tls/certs/cert.pem'
+httpd_ssl_certificate_key_file: '/etc/pki/tls/private/key.pem'
+httpd_ssl_certificate_chain_file: '/etc/pki/tls/certs/chain.pem'
+
+# Nginx variables
+# ~~~~~~~~~~~~~~~
+nginx_https_port: 443
+nginx_https_ida_pas_port: 4443
+
+# Database variables
+# ~~~~~~~~~~~~~~~~~~
+db_host: 'localhost'
+db_type: 'pgsql'
+db_port: 5432
+db_name: 'nextcloud'
+db_admin_user: 'admin'
+db_admin_password: 'pass'
+db_user: 'nextcloud'
+db_password: 'nextcloud'
+
+# RabbitMQ variables
+# ~~~~~~~~~~~~~~~~~~
+rabbitmq_host: 'localhost'
+rabbitmq_port: 5672
+rabbitmq_web_api_port: 15672
+rabbitmq_vhost: 'ida-vhost'
+rabbitmq_admin_user: 'admin'
+rabbitmq_admin_password: 'test'
+rabbitmq_worker_user: 'worker'
+rabbitmq_worker_password: 'test'
+rabbitmq_monitor_user: 'monitor'
+rabbitmq_monitor_password: 'test'
+
+# Configuration variables
+# ~~~~~~~~~~~~~~~~~~~~~~~
+application_user: 'apache'
+application_group: 'apache'
+
+application_data_directory: '{{ directory_data1_root }}/ida'
+
+application_environment: 'TEST'
+application_debug: 'true'
+application_no_flush_after_tests: 'true'
+application_batch_action_token: 'test'
+application_project_user_pass: 'test'
+
+application_secret: 'secret'
+application_passwordhash: 'passwordhash'
+
+application_admin_user: 'admin'
+application_admin_pass: 'test'
+application_project_test_user_pass: 'test'
+application_test_user_pass: 'test'
+
+application_email_sender: 'ida-dev@listat.csc.fi'
+application_email_recipients: 'ida-dev@listat.csc.fi'
+
+ldap_host_url: 'ldaps://ldap.example.com'
+ldap_bind_user: 'uid=test,ou=Special Users,dc=csc,dc=fi'
+ldap_password: 'secret'
+ldap_search_base: 'ou=idm,dc=csc,dc=fi'
+
+metax_base_url: 'https://metax.fairdata.fi/'
+metax_file_storage_id: 'urn:nbn:fi:att:file-storage-ida'
+metax_user: 'ida'
+metax_pass: 'ida'
+
+sso_api_url: 'https://sso.fairdata.fi'
+sso_api_domain: 'fairdata.fi'
+sso_authentication: 'false'
+sso_key: 'secret'
+
+fdwe_url: 'https://matomo.fairdata.fi/fdwe.js'

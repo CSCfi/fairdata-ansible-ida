@@ -1,0 +1,13 @@
+---
+- name: Restart httpd
+  service:
+    name: 'httpd'
+    state: 'restarted'
+  become: yes
+
+- name: Restart Nginx
+  systemd:
+    name: 'nginx'
+    state: 'restarted'
+  become: yes
+

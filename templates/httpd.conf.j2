@@ -1,0 +1,43 @@
+Listen {{ httpd_http_port }}
+Listen {{ httpd_https_port }} https
+Listen {{ httpd_https_ida_pas_port }} https
+
+<VirtualHost _default_:{{ httpd_http_port }}>
+   ServerName {{ deployment_fqdn }}:{{ httpd_http_port }}
+   UseCanonicalName On
+   Redirect permanent / https://{{ deployment_fqdn }}
+</VirtualHost>
+
+<VirtualHost _default_:{{ httpd_https_port }}>
+  ServerName {{ deployment_fqdn }}:{{ httpd_https_port }}
+  UseCanonicalName On
+  SSLEngine on
+
+  # TODO: Add more secure CSP
+  Header set Content-Security-Policy "default-src 'self' * 'unsafe-inline' data: 'unsafe-eval';"
+
+  DocumentRoot "{{ repo_ida_path }}/nextcloud"
+
+  <Directory "{{ repo_ida_path }}/nextcloud">
+      Options Indexes FollowSymLinks
+      AllowOverride All
+      Order allow,deny
+      allow from all
+
+      Require all granted
+  </Directory>
+
+  <Directory "{{ repo_ida_path }}">
+      Options Indexes FollowSymLinks
+      AllowOverride All
+      Require all granted
+  </Directory>
+</VirtualHost>
+
+<VirtualHost _default_:{{ httpd_https_ida_pas_port }}>
+  ServerName {{ deployment_fqdn }}:{{ httpd_https_ida_pas_port }}
+  UseCanonicalName On
+  SSLEngine on
+
+  ProxyPass / http://127.0.0.1:8000/
+</VirtualHost>

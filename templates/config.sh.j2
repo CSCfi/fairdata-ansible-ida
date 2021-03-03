@@ -1,0 +1,72 @@
+IDA_ENVIRONMENT="{{ application_environment }}"
+DEBUG="{{ application_debug }}"
+NO_FLUSH_AFTER_TESTS="{{ application_no_flush_after_tests }}"
+
+HTTPD_USER="{{ application_user }}"
+
+NC_ADMIN_USER="{{ application_admin_user }}"
+NC_ADMIN_PASS="{{ application_admin_pass }}"
+PROJECT_USER_PASS="{{ application_project_user_pass }}"
+TEST_USER_PASS="{{ application_test_user_pass }}"
+BATCH_ACTION_TOKEN="{{ application_batch_action_token }}"
+
+DBTYPE="{{ db_type }}"
+DBNAME="{{ db_name }}"
+DBHOST="{{ db_host }}"
+DBPORT={{ db_port }}
+DBTABLEPREFIX="oc_"
+DBUSER="{{ db_user }}"
+DBPASSWORD="{{ db_password }}"
+DBROUSER="{{ db_user }}"
+DBROPASSWORD="{{ db_password }}"
+
+RABBIT_HOST="{{ rabbitmq_host }}"
+RABBIT_PORT={{ rabbitmq_port }}
+RABBIT_WEB_API_PORT={{ rabbitmq_web_api_port }}
+RABBIT_VHOST="{{ rabbitmq_vhost }}"
+RABBIT_ADMIN_USER="{{ rabbitmq_admin_user }}"
+RABBIT_ADMIN_PASS="{{ rabbitmq_admin_password }}"
+RABBIT_WORKER_USER="{{ rabbitmq_worker_user }}"
+RABBIT_WORKER_PASS="{{ rabbitmq_worker_password }}"
+RABBIT_WORKER_LOG_FILE="{{ directory_data1_root }}/log/agents-ida-test.log"
+RABBIT_HEARTBEAT=0
+RABBIT_MONITOR_USER="{{ rabbitmq_monitor_user }}"
+RABBIT_MONITOR_PASS="{{ rabbitmq_monitor_password }}"
+RABBIT_MONITORING_DIR="{{ directory_data1_root }}/log/rabbitmq_monitoring"
+
+METAX_AVAILABLE=1
+METAX_FILE_STORAGE_ID="{{ metax_file_storage_id }}"
+METAX_FILE_STORAGE_ID=1
+METAX_API_USER="{{ metax_user }}"
+METAX_API_ROOT_URL="{{ metax_base_url }}rest/v1"
+METAX_API_RPC_URL="{{ metax_base_url }}rpc/v1"
+METAX_API_PASS="{{ metax_pass }}"
+
+ROOT="{{ repo_ida_path }}"
+OCC="$ROOT/nextcloud/occ"
+LOG="{{ directory_data1_root }}/log/ida-test.log"
+
+IDA_API_ROOT_URL="https://{{ deployment_fqdn }}/apps/ida/api"
+
+URL_BASE_SHARE='https://{{ deployment_fqdn }}/ocs/v1.php/apps/files_sharing/api/v1/shares'
+URL_BASE_FILE='https://{{ deployment_fqdn }}/remote.php/webdav'
+URL_BASE_GROUP='https://{{ deployment_fqdn }}/ocs/v1.php/cloud/groups'
+URL_BASE_IDA="https://{{ deployment_fqdn }}/apps/ida"
+
+LDAP_HOST_URL="{{ ldap_host_url }}"
+LDAP_BIND_USER="{{ ldap_bind_user }}"
+LDAP_PASSWORD="{{ ldap_password }}"
+LDAP_SEARCH_BASE="{{ ldap_search_base }}"
+
+STORAGE_CANDIDATES=("{{ directory_data1_root }}/ida" "{{ directory_data1_root }}/ida")
+STORAGE_OC_DATA_ROOT="{{ directory_data1_root }}/ida"
+
+DATA_REPLICATION_ROOT="{{ directory_data2_root }}/ida_replication"
+
+PYTHON="{{ python_executable }}"
+
+TRASH_DATA_ROOT="{{ directory_data2_root }}/ida_trash"
+QUARANTINE_PERIOD="0"
+
+EMAIL_SENDER="{{ application_email_sender }}"
+EMAIL_RECIPIENTS="{{ application_email_recipients }}"

@@ -1,0 +1,68 @@
+---
+- name: Install Nextcloud
+  command:
+    cmd: 'php {{ repo_ida_path }}/nextcloud/occ maintenance:install --database "{{ db_type }}" --database-name "{{ db_name }}" --database-host "{{ db_host }}" --database-user "{{ db_user }}" --database-pass "{{ db_password }}" --admin-user "{{ application_admin_user }}" --admin-pass "{{ application_admin_pass }}" --data-dir "{{ directory_data1_root }}/ida"'
+    creates: '/var/ida-config/config.php'
+  become: 'yes'
+  become_user: '{{ application_user }}'
+  register: 'nextcloud_installation'
+  tags: ida-nextcloud
+
+- name: Ensure IDA nextcloud config.php is set correctly
+  template:
+    src: 'config.php.j2'
+    dest: '/var/ida-config/config.php'
+    owner: '{{ application_user }}'
+    group: '{{ application_group }}'
+    mode: '0666'
+  become: 'yes'
+  tags: ida-nextcloud
+
+- block:
+
+  - name: Ensure htaccess file generated in installation is removed
+    command:
+      cmd: 'git reset --hard'
+      chdir: '{{ repo_ida_path }}'
+    become: 'yes'
+    tags: ida-nextcloud
+
+  - name: Run IDA fix-permissions command
+    command:
+      cmd: '{{ repo_ida_path }}/utils/fix-permissions'
+    become: 'yes'
+    tags: ida-nextcloud
+
+  - name: Enable IDA nextcloud apps
+    command: 'php {{ repo_ida_path }}/nextcloud/occ app:enable {{ item }}'
+    with_items:
+    - 'ida'
+    - 'idafirstrunwizard'
+    - 'admin_audit'
+    become: 'yes'
+    become_user: '{{ application_user }}'
+    tags: ida-nextcloud
+
+  - name: Configure IDA nextcloud admin_audit app
+    command: 'php {{ repo_ida_path }}/nextcloud/occ config:app:set admin_audit logfile --value={{ directory_log }}/admin-audit.log'
+    become: 'yes'
+    become_user: '{{ application_user }}'
+    tags: ida-nextcloud
+
+  - name: Index IDA database
+    command:
+      cmd: 'psql -f {{ repo_ida_path }}/utils/create_db_indices.pgsql {{ db_name }}'
+    become: 'yes'
+    become_user: 'postgres'
+    tags: ida-nextcloud
+
+  when: 'nextcloud_installation.changed'
+
+- name: Ensure IDA nextcloud crontab record is set correctly
+  cron:
+    user: '{{ application_user }}'
+    name: 'IDA nextcloud cron'
+    minute: '*/15'
+    job: 'php -f {{ repo_ida_path }}/nextcloud/cron.php'
+  become: 'yes'
+  tags: ida-nextcloud
