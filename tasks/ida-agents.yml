@@ -30,7 +30,7 @@
   become: 'yes'
   tags: ida-agents
 
-- name: Ensure IDA agents systemd services are enabled
+- name: Ensure IDA agents systemd services are started and enabled
   systemd:
     name: '{{ item }}'
     state: 'started'
@@ -40,4 +40,11 @@
     - 'fairdata-ida-metadata-agent.service'
     - 'fairdata-ida-replication-agent.service'
   become: yes
+  tags: ida-agents
+
+- name: Ensure IDA rabbitmq server is initialized correctly
+  command:
+    cmd: '{{ repo_ida_path }}/utils/initialize_rabbitmq'
+  become: 'yes'
+  notify: Restart IDA agents
   tags: ida-agents
