@@ -6,6 +6,7 @@ prepare_application: True
 deploy_application: True
 update_proxy: True
 use_nginx: False
+run_tests: False
 
 # Instance variables
 # ~~~~~~~~~~~~~~~~~~
