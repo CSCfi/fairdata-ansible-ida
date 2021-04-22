@@ -1,0 +1,38 @@
+---
+- name: Ensure SELinux is disabled
+  selinux:
+    state: disabled
+  become: yes
+  tags: ida-selinux
+
+- name: Include IDA repository tasks
+  include_tasks: "ida-repository.yml"
+  when: deploy_application
+  tags: ida-repository
+
+- name: Include IDA configuration tasks
+  include_tasks: "ida-configure.yml"
+  when: deploy_application
+  tags: ida-configure
+
+- name: Include IDA nextcloud tasks
+  include_tasks: "ida-nextcloud.yml"
+  when: deploy_application
+  tags: ida-nextcloud
+
+- name: Include IDA agents tasks
+  include_tasks: "ida-agents.yml"
+  when: deploy_application
+  tags: ida-agents
+
+- name: Include IDA proxy tasks
+  include_tasks: "ida-proxy.yml"
+  when: update_proxy
+  tags: ida-proxy
+
+- name: Include IDA nginx tasks
+  include_tasks: "ida-nginx.yml"
+  when:
+     - update_proxy
+     - use_nginx
+  tags: ida-nginx

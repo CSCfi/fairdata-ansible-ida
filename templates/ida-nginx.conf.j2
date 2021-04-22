@@ -1,0 +1,19 @@
+server {
+    listen       {{ nginx_https_port }} ssl http2;
+    listen       [::]:{{ nginx_https_port }} ssl http2;
+    server_name  {{ deployment_fqdn }};
+
+    location / {
+        proxy_pass https://localhost:{{ httpd_https_port }}/;
+    }
+}
+
+server {
+    listen       {{ nginx_https_ida_pas_port }} ssl http2;
+    listen       [::]:{{ nginx_https_ida_pas_port }} ssl http2;
+    server_name  {{ deployment_fqdn }};
+
+    location / {
+        proxy_pass https://localhost:{{ httpd_https_ida_pas_port }}/;
+    }
+}

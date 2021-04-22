@@ -1,0 +1,29 @@
+---
+- name: Ensure required httpd modules are installed
+  yum:
+    name:
+    - mod_ssl
+    - mod_php
+    - mod_security
+    - mod_security_crs
+    state: latest
+  become: yes
+  notify: Restart httpd
+  tags: ida-proxy
+
+- name: Ensure mod_security is disabled
+  lineinfile:
+    path: '/etc/httpd/conf.d/mod_security.conf'
+    regexp: 'SecRuleEngine'
+    line: '    SecRuleEngine Off'
+  become: yes
+  notify: Restart httpd
+  tags: ida-proxy
+
+- name: Copy IDA httpd configuration files
+  template:
+    src: 'httpd.conf.j2'
+    dest: '/etc/httpd/conf.d/ida.conf'
+  become: 'yes'
+  notify: Restart httpd
+  tags: ida-proxy

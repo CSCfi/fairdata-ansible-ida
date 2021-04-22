@@ -1,0 +1,43 @@
+---
+- name: Ensure that postprocessing virtualenv directory is owned by the application user
+  file:
+    path: '{{ directory_venv_agents }}'
+    owner: '{{ application_user }}'
+    group: '{{ application_group }}'
+    state: 'directory'
+  become: yes
+  tags: ida-agents
+
+- name: Install IDA agents requirements in virtualenv
+  pip:
+    requirements: '{{ repo_ida_path }}/requirements.txt'
+    virtualenv: '{{ directory_venv_agents }}'
+    virtualenv_command: '{{ python_virtualenv_command }}'
+  become: yes
+  become_user: '{{ application_user }}'
+  tags: ida-agents
+
+- name: Ensure IDA agents systemd files are correct
+  template:
+    src: '{{ item }}.j2'
+    dest: '/etc/systemd/system/{{ item }}'
+    owner: '{{ application_user }}'
+    group: '{{ application_group }}'
+    mode: '0644'
+  with_items:
+    - 'fairdata-ida-metadata-agent.service'
+    - 'fairdata-ida-replication-agent.service'
+  become: 'yes'
+  tags: ida-agents
+
+- name: Ensure IDA agents systemd services are enabled
+  systemd:
+    name: '{{ item }}'
+    state: 'started'
+    enabled: 'yes'
+    daemon_reload: 'yes'
+  with_items:
+    - 'fairdata-ida-metadata-agent.service'
+    - 'fairdata-ida-replication-agent.service'
+  become: yes
+  tags: ida-agents
