@@ -93,6 +93,9 @@ application_user: 'apache'
 application_group: 'apache'
 
 application_data_directory: '{{ directory_data1_root }}/ida'
+application_storage_candidates:
+  - "{{ directory_data1_root }}/ida"
+  - "{{ directory_data2_root }}/ida"
 
 application_environment: 'TEST'
 application_debug: 'true'
