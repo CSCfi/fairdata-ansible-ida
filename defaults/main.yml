@@ -125,5 +125,6 @@ sso_api_url: 'https://sso.fairdata.fi'
 sso_api_domain: 'fairdata.fi'
 sso_authentication: 'false'
 sso_key: 'secret'
+sso_password: 'test'
 
 fdwe_url: 'https://matomo.fairdata.fi/fdwe.js'
