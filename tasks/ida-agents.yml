@@ -30,6 +30,17 @@
   become: 'yes'
   tags: ida-agents
 
+- name: Link IDA agents systemd files to agents service files
+  file:
+    src: '/etc/systemd/system/{{ item }}'
+    dest: '/var/ida/agents/services/{{ item }}'
+    state: 'link'
+  with_items:
+  - 'rabbitmq-metadata-agent.service'
+  - 'rabbitmq-replication-agent.service'
+  become: 'yes'
+  tags: ida-agents
+
 - name: Initialize rabbitmq queues for agents
   command:
     cmd: '{{ directory_venv_agents }}/bin/python -m agents.utils.rabbitmq'
