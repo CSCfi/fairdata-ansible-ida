@@ -32,8 +32,10 @@
 
 - name: Link IDA agents systemd files to agents service files
   file:
-    src: '/etc/systemd/system/{{ item }}'
-    dest: '/var/ida/agents/services/{{ item }}'
+    src: '/var/ida/agents/services/{{ item }}'
+    dest: '/etc/systemd/system/{{ item }}'
+    # src: '/etc/systemd/system/{{ item }}'
+    # dest: '/var/ida/agents/services/{{ item }}'
     state: 'link'
   with_items:
   - 'rabbitmq-metadata-agent.service'
