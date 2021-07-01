@@ -16,6 +16,6 @@
     name: '{{ item }}'
     state: 'restarted'
   with_items:
-    - 'fairdata-ida-metadata-agent.service'
-    - 'fairdata-ida-replication-agent.service'
+    - 'rabbitmq-metadata-agent.service'
+    - 'rabbitmq-replication-agent.service'
   become: yes

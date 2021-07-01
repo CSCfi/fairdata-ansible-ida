@@ -25,8 +25,8 @@
     group: '{{ application_group }}'
     mode: '0644'
   with_items:
-    - 'fairdata-ida-metadata-agent.service'
-    - 'fairdata-ida-replication-agent.service'
+    - 'rabbitmq-metadata-agent.service'
+    - 'rabbitmq-replication-agent.service'
   become: 'yes'
   tags: ida-agents
 
@@ -45,7 +45,7 @@
     enabled: 'yes'
     daemon_reload: 'yes'
   with_items:
-    - 'fairdata-ida-metadata-agent.service'
-    - 'fairdata-ida-replication-agent.service'
+    - 'rabbitmq-metadata-agent.service'
+    - 'rabbitmq-replication-agent.service'
   become: yes
   tags: ida-agents
