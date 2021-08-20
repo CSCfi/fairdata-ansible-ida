@@ -9,7 +9,7 @@ $CONFIG = array (
   ),
   'datadirectory' => '{{ application_data_directory }}',
   'overwrite.cli.url' => 'https://{{ deployment_fqdn }}/',
-  'dbtype' => 'pgsql',
+  'dbtype' => {{ db_type }},
   'version' => '16.0.3.0',
   'dbname' => '{{ db_name }}',
   'dbhost' => '{{ db_host }}',
