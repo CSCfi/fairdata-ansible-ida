@@ -6,7 +6,8 @@
     - mod_php
     - mod_security
     - mod_security_crs
-    state: latest
+    # state: present, in order not to upgrade any package to an untested version
+    state: 'present'
   become: yes
   notify: Restart httpd
   tags: ida-proxy
