@@ -14,6 +14,7 @@
   - url: '{{ repo_ida_tools_url }}'
     version: '{{ repo_ida_tools_version }}'
     dest: '{{ repo_ida_tools_path }}'
+  when: repo_install_method == 'pull'
   become: yes
   tags: ida-repository
 
