@@ -6,6 +6,7 @@ prepare_application: True
 deploy_application: True
 update_proxy: True
 use_nginx: False
+run_tests: False
 
 # Instance variables
 # ~~~~~~~~~~~~~~~~~~
@@ -29,6 +30,7 @@ deploy_key: '~/.ssh/id_rsa'
 # Repo variables
 # ~~~~~~~~~~~~~~
 # Variables related to source repository
+repo_install_method: 'pull'
 repo_ida_url: 'https://github.com/CSCfi/ida2'
 repo_ida_version: 'master'
 repo_ida_path: '{{ directory_source_root }}/ida'
@@ -92,6 +94,9 @@ application_user: 'apache'
 application_group: 'apache'
 
 application_data_directory: '{{ directory_data1_root }}/ida'
+application_storage_candidates:
+  - "{{ directory_data1_root }}/ida"
+  - "{{ directory_data2_root }}/ida"
 
 application_environment: 'TEST'
 application_debug: 'true'
@@ -124,5 +129,6 @@ sso_api_url: 'https://sso.fairdata.fi'
 sso_api_domain: 'fairdata.fi'
 sso_authentication: 'false'
 sso_key: 'secret'
+sso_password: 'test'
 
 fdwe_url: 'https://matomo.fairdata.fi/fdwe.js'

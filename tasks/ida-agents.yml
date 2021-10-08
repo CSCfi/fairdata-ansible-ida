@@ -25,19 +25,27 @@
     group: '{{ application_group }}'
     mode: '0644'
   with_items:
-    - 'fairdata-ida-metadata-agent.service'
-    - 'fairdata-ida-replication-agent.service'
+    - 'rabbitmq-metadata-agent.service'
+    - 'rabbitmq-replication-agent.service'
   become: 'yes'
   tags: ida-agents
 
-- name: Ensure IDA agents systemd services are enabled
+- name: Initialize rabbitmq queues for agents
+  command:
+    cmd: '{{ directory_venv_agents }}/bin/python -m agents.utils.rabbitmq'
+    chdir: '{{ repo_ida_path }}'
+  become: 'yes'
+  notify: Restart IDA agents
+  tags: ida-agents
+
+- name: Ensure IDA agents systemd services are started and enabled
   systemd:
     name: '{{ item }}'
     state: 'started'
     enabled: 'yes'
     daemon_reload: 'yes'
   with_items:
-    - 'fairdata-ida-metadata-agent.service'
-    - 'fairdata-ida-replication-agent.service'
+    - 'rabbitmq-metadata-agent.service'
+    - 'rabbitmq-replication-agent.service'
   become: yes
   tags: ida-agents

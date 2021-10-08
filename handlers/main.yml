@@ -11,3 +11,11 @@
     state: 'restarted'
   become: yes
 
+- name: Restart IDA agents
+  systemd:
+    name: '{{ item }}'
+    state: 'restarted'
+  with_items:
+    - 'rabbitmq-metadata-agent.service'
+    - 'rabbitmq-replication-agent.service'
+  become: yes

@@ -36,3 +36,10 @@
      - update_proxy
      - use_nginx
   tags: ida-nginx
+
+- name: Run IDA tests
+  command:
+    cmd: '{{ repo_ida_path }}/tests/run-tests'
+  become: 'yes'
+  when: run_tests
+  tags: ida-tests

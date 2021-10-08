@@ -54,6 +54,7 @@
       cmd: 'psql -f {{ repo_ida_path }}/utils/create_db_indices.pgsql {{ db_name }}'
     become: 'yes'
     become_user: 'postgres'
+    ignore_errors: 'yes'    # TODO: This doesn't work when database (incl. client) is installed on a separate server
     tags: ida-nextcloud
 
   when: 'nextcloud_installation.changed'
