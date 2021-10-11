@@ -17,7 +17,7 @@ deployment_fqdn: '{{ instance_name }}.{{ instance_domain }}'
 # Directory variables
 # ~~~~~~~~~~~~~~~~~~~
 # Variables determining used directories
-directory_source_root: '/opt/temp'
+directory_source_root: '/var'
 directory_venv_agents: '{{ repo_ida_path }}/venv'
 directory_log: '/var/log/ida'
 directory_data1_root: '/var/lib/storage_vol01'
