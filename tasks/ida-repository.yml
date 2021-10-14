@@ -13,7 +13,7 @@
 - name: Fetch IDA tools repository sources with git
   git:
     repo: '{{ repo_ida_tools_url }}'
-    version: '{{ repo_ida_version }}'
+    version: '{{ repo_ida_tools_version }}'
     key_file: '{{ deploy_key }}'
     accept_hostkey: 'yes'
     dest: '{{ repo_ida_tools_path }}'
