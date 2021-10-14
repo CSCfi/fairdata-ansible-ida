@@ -16,7 +16,7 @@
     version: '{{ repo_ida_version }}'
     key_file: '{{ deploy_key }}'
     accept_hostkey: 'yes'
-    dest: '{{ repo_ida_path }}'
+    dest: '{{ repo_ida_tools_path }}'
     force: 'yes'
   when: repo_install_method == 'pull'
   tags: ida-repository
