@@ -21,12 +21,13 @@
   when: repo_install_method == 'pull'
   tags: ida-repository
 
-- name: Ensure IDA repository is owned by the application user
+- name: Ensure IDA repository contents is owned by the application user group
   file:
     path: '{{ repo_ida_path }}'
-    owner: '{{ application_user }}'
+    # Disable for now, so that git updates work with CI/CD
+    # owner: '{{ application_user }}'
     group: '{{ application_group }}'
-    state: 'directory'
     recurse: 'yes'
+    state: 'directory'
   become: yes
   tags: ida-repository
