@@ -21,20 +21,20 @@
   tags: ida-configure
 
 - name: Create IDA storage logrotation
-    template:
-      src: 'storage-logrotation.conf.j2'
-      dest: '/etc/logrotate.d/storage_vol01'
-      mode: '0644'
-    become: yes
-    tags: ida-configure
+  template:
+    src: 'storage-logrotation.conf.j2'
+    dest: '/etc/logrotate.d/storage_vol01'
+    mode: '0644'
+  become: yes
+  tags: ida-configure
 
 - name: Create IDA var logrotation
-    template:
-      src: 'fairdata-ida-logrotation.conf.j2'
-      dest: '/etc/logrotate.d/fairdata-{{ instance_name }}'
-      mode: '0644'
-    become: yes
-    tags: ida-configure
+  template:
+    src: 'fairdata-ida-logrotation.conf.j2'
+    dest: '/etc/logrotate.d/fairdata-{{ instance_name }}'
+    mode: '0644'
+  become: yes
+  tags: ida-configure
 
 - name: Link IDA configuration files to source repositories
   file:
