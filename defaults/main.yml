@@ -92,6 +92,7 @@ rabbitmq_monitor_password: 'test'
 # ~~~~~~~~~~~~~~~~~~~~~~~
 application_user: 'apache'
 application_group: 'apache'
+storage_log: '/mnt/storage_vol01/log'
 
 application_data_directory: '{{ directory_data1_root }}/ida'
 application_storage_candidates:
