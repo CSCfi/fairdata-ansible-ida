@@ -1,4 +1,5 @@
 {{ storage_log }}/*.log {
+    su {{ application_user }} {{ application_group }}
     daily
     rotate 90
     copytruncate
