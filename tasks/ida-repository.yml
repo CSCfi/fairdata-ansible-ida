@@ -1,4 +1,15 @@
 ---
+- name: Ensure IDA repository contents is owned by the application user group
+  file:
+    path: '{{ repo_ida_path }}'
+    # Disable for now, so that git updates work with CI/CD
+    # owner: '{{ application_user }}'
+    group: '{{ application_group }}'
+    recurse: 'yes'
+    state: 'directory'
+  become: yes
+  tags: ida-repository
+
 - name: Fetch IDA app repository sources with git
   git:
     repo: '{{ repo_ida_url }}'
