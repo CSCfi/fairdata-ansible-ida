@@ -12,9 +12,7 @@
 
 - name: Include IDA repository tasks
   include_tasks: "ida-repository.yml"
-  when:
-     - deploy_application
-     - update_git_repository
+  when: update_git_repository
   tags: ida-repository
 
 - name: Include IDA configuration tasks
@@ -50,7 +48,7 @@
     state: absent
     path: '{{ repo_ida_path }}/tests/'
   become: yes
-  when: update_git_repository
+  when: delete_tests
   tags: ida-git-installation
 
 - name: Run IDA tests
