@@ -44,6 +44,7 @@
   file:
     state: absent
     path: '{{ repo_ida_path }}/tests/'
+  become: yes
   when: git_installation
   tags: ida-git-installation
 
