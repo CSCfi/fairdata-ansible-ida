@@ -3,11 +3,7 @@
   selinux:
     state: disabled
   become: yes
-  when:
-    - deploy_application
-    - update_proxy
-    - update_nginx
-    - run_tests
+  when: deploy_application
   tags: ida-selinux
 
 - name: Include IDA repository tasks
