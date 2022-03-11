@@ -20,12 +20,13 @@
   become: yes
   tags: ida-repository
 
-- name: Fetch IDA tools repository sources with git
-  git:
-    repo: '{{ repo_ida_tools_url }}'
-    version: '{{ repo_ida_tools_version }}'
-    force: 'yes'
-    key_file: '{{ deploy_key }}'
-    accept_hostkey: 'yes'
-    dest: '{{ repo_ida_tools_path }}'
-  tags: ida-repository
+# Disabled for now, to enable later
+#- name: Fetch IDA tools repository sources with git
+#  git:
+#    repo: '{{ repo_ida_tools_url }}'
+#    version: '{{ repo_ida_tools_version }}'
+#    force: 'yes'
+#    key_file: '{{ deploy_key }}'
+#    accept_hostkey: 'yes'
+#    dest: '{{ repo_ida_tools_path }}'
+#  tags: ida-repository
