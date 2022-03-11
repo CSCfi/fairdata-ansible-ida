@@ -31,7 +31,6 @@ deploy_key: '~/.ssh/id_rsa'
 # Repo variables
 # ~~~~~~~~~~~~~~
 # Variables related to source repository
-repo_install_method: 'pull'
 repo_ida_url: 'https://github.com/CSCfi/ida2'
 repo_ida_version: 'master'
 repo_ida_path: '{{ directory_source_root }}/ida'
