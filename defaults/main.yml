@@ -8,6 +8,7 @@ update_proxy: True
 use_nginx: False
 run_tests: False
 delete_tests: False
+initialize_git_repository: True
 update_git_repository: True
 
 # Instance variables

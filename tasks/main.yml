@@ -6,6 +6,11 @@
   when: deploy_application
   tags: ida-selinux
 
+- name: Initialize IDA repository tasks
+  include_tasks: "ida-repository-init.yml"
+  when: initialize_git_repository
+  tags: ida-repository
+
 - name: Include IDA repository tasks
   include_tasks: "ida-repository.yml"
   when: update_git_repository

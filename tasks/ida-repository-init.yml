@@ -1,0 +1,19 @@
+---
+- name: Initialize repository
+  command: git init --bare /var/ida/.git/
+  args:
+    creates: /var/ida/.git/HEAD
+  become: yes
+
+- name: Set remote
+  command: chdir=/var/ida git remote add origin https://github.com/CSCfi/ida2.git
+  become: yes
+
+- name: Fetch
+  command: chdir=/var/ida git fetch
+  become: yes
+
+- name: Checkout master
+  command: git checkout -f master
+  become: yes
+
