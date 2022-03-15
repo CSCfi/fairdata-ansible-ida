@@ -2,14 +2,14 @@
 # Role control variables
 # ~~~~~~~~~~~~~~~~~~~~~~
 # Variables used to control role execution
-prepare_application: True
-deploy_application: True
-update_proxy: True
+prepare_application: False
+deploy_application: False
+update_proxy: False
 use_nginx: False
 run_tests: False
 delete_tests: False
-initialize_git_repository: True
-update_git_repository: True
+initialize_git_repository: False
+update_git_repository: False
 
 # Instance variables
 # ~~~~~~~~~~~~~~~~~~
