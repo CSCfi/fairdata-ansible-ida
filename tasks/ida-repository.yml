@@ -13,7 +13,7 @@
 - name: Ensure repository directory exists with correct permissions
   file:
     path: '{{ repo_ida_path }}'
-    owner: '{{ application_user }}'
+    owner: root
     group: '{{ application_group }}'
     recurse: 'yes'
     state: 'directory'
