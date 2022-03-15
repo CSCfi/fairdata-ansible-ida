@@ -15,7 +15,11 @@
   command: chdir=/var/ida git fetch
   become: yes
 
+- name: Reset git config
+  command: chdir=/var/ida git config --unset core.bare
+  become: yes
+
 - name: Checkout master
-  command: chdir=/var/ida git config --unset core.bare && git checkout -f master
+  command: chdir=/var/ida git checkout -f master
   become: yes
 
