@@ -8,6 +8,8 @@
 - name: Set remote
   command: chdir=/var/ida git remote add origin https://github.com/CSCfi/ida2.git
   become: yes
+  # Ignore if already exist
+  ignore_errors: yes
 
 - name: Fetch
   command: chdir=/var/ida git fetch
