@@ -3,11 +3,17 @@
   selinux:
     state: disabled
   become: yes
+  when: deploy_application
   tags: ida-selinux
+
+- name: Initialize IDA repository tasks
+  include_tasks: "ida-repository-init.yml"
+  when: initialize_git_repository
+  tags: ida-repository
 
 - name: Include IDA repository tasks
   include_tasks: "ida-repository.yml"
-  when: deploy_application
+  when: update_git_repository
   tags: ida-repository
 
 - name: Include IDA configuration tasks
@@ -36,6 +42,15 @@
      - update_proxy
      - use_nginx
   tags: ida-nginx
+
+# Delete IDA tests to ensure that they are not run by accident
+- name: Delete IDA tests
+  file:
+    state: absent
+    path: '{{ repo_ida_path }}/tests/'
+  become: yes
+  when: delete_tests
+  tags: ida-git-installation
 
 - name: Run IDA tests
   command:

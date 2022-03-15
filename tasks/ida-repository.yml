@@ -3,31 +3,30 @@
   git:
     repo: '{{ repo_ida_url }}'
     version: '{{ repo_ida_version }}'
+    force: 'yes'
     key_file: '{{ deploy_key }}'
     accept_hostkey: 'yes'
     dest: '{{ repo_ida_path }}'
-    force: 'yes'
-  when: repo_install_method == 'pull'
+  become: yes
   tags: ida-repository
 
-- name: Fetch IDA tools repository sources with git
-  git:
-    repo: '{{ repo_ida_tools_url }}'
-    version: '{{ repo_ida_tools_version }}'
-    key_file: '{{ deploy_key }}'
-    accept_hostkey: 'yes'
-    dest: '{{ repo_ida_tools_path }}'
-    force: 'yes'
-  when: repo_install_method == 'pull'
-  tags: ida-repository
-
-- name: Ensure IDA repository contents is owned by the application user group
+- name: Ensure repository directory exists with correct permissions
   file:
     path: '{{ repo_ida_path }}'
-    # Disable for now, so that git updates work with CI/CD
-    # owner: '{{ application_user }}'
+    owner: root
     group: '{{ application_group }}'
     recurse: 'yes'
     state: 'directory'
   become: yes
   tags: ida-repository
+
+# Disabled for now, to enable later
+#- name: Fetch IDA tools repository sources with git
+#  git:
+#    repo: '{{ repo_ida_tools_url }}'
+#    version: '{{ repo_ida_tools_version }}'
+#    force: 'yes'
+#    key_file: '{{ deploy_key }}'
+#    accept_hostkey: 'yes'
+#    dest: '{{ repo_ida_tools_path }}'
+#  tags: ida-repository
